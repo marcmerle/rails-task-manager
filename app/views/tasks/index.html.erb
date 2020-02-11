@@ -1,0 +1,27 @@
+<div class="container">
+  <div id="title">
+    <h2>My Tasks</h2>
+  </div>
+
+  <div id="list d-flex">
+    <ul class="list-group">
+      <% @tasks.each do |task| %>
+      <li class="list-group-item">
+        <% if task.completed? %>
+          <input type="checkbox" id="checked" checked>
+          <label for="checked"><%= link_to task.title, task_path(task) %></label>
+        <% else %>
+          <input type="checkbox" id="checked">
+          <label for="checked"><%= link_to task.title, task_path(task) %></label>
+        <% end %>
+        <%= link_to destroy_path(task[:id]), method: "delete", data: {confirm: "Are you sure?"} do %>
+        <i class="fas fa-trash"></i>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="add-a-task">
+    <%= link_to 'Add a new task',tasks_new_path %>
+  </div>
+</div>
